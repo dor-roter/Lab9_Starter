@@ -47,6 +47,25 @@
       width: 122px;
     }
   </style>
+
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "6289d81f70c64f498747aa57f053dffd"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+
+  <script>    
+    function Person(firstName, lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+
+    const john = new Person("John", "Smith");
+    const jane = new Person("Jane", "Doe");
+    const emily = new Person("Emily", "Jones");
+  </script>
 </head>
 
 <body>
@@ -68,22 +87,24 @@
       </fieldset>
     </form>
 
+    <!-- <div id="so"></div> -->
+
     <section id="error-btns">
-      <button>Console Log</button>
-      <button>Console Error</button>
-      <button>Console Count</button>
-      <button>Console Warn</button>
-      <button>Console Assert</button>
-      <button>Console Clear</button>
-      <button>Console Dir</button>
-      <button>Console dirxml</button>
-      <button>Console Group Start</button>
-      <button>Console Group End</button>
-      <button>Console Table</button>
-      <button>Start Timer</button>
-      <button>End Timer</button>
-      <button>Console Trace</button>
-      <button>Trigger a Global Error</button>
+      <button onclick="console.log('console.log demo');">Console Log</button>
+      <button onclick="console.error('console.error demo');">Console Error</button>
+      <button onclick="console.count('Count button');">Console Count</button>
+      <button onclick="console.warn('console.warn demo');">Console Warn</button>
+      <button onclick="console.assert(5 % 2 === 0, {number: 5, errorMsg: 'number 5 is not even'});">Console Assert</button>
+      <button onclick="console.clear();">Console Clear</button>
+      <button onclick="console.dir(this);">Console Dir</button>
+      <button onclick="console.dirxml(this);">Console dirxml</button>
+      <button onclick="console.group();">Console Group Start</button>
+      <button onclick="console.groupEnd();">Console Group End</button>
+      <button onclick="console.table([john, jane, emily]);">Console Table</button>
+      <button onclick="console.time('Timer button');">Start Timer</button>
+      <button onclick="console.timeEnd('Timer button');">End Timer</button>
+      <button onclick="console.trace();">Console Trace</button>
+      <button onclick="console.log(boom);">Trigger a Global Error</button>
     </section>
   </main>
 
@@ -102,6 +123,25 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    // part 3
+    try {
+      const so = document.getElementById("so");
+      so.innerHTML = "Yup";
+    }
+    catch(err) {
+      console.log(`caught ${err}`);
+    }   
+
+    // part 4
+    class CostumeErr extends Error {
+      constructor(message) {
+        super(message);
+        this._costume = 1;
+        this.name = "CostumeErr";
+      }
+    }
+    throw new CostumeErr("new err");
   </script>
 </body>
 
